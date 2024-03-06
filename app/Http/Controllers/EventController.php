@@ -11,6 +11,15 @@ use Illuminate\Support\Facades\Storage;
 
 class EventController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware(['permission:view events|filter events|search events|view details|reserve place|generate ticket'])->only(['index', 'show']);
+        $this->middleware(['permission:create events'])->only(['create', 'store']);
+        $this->middleware(['permission:manage events'])->only(['edit', 'update']);
+        $this->middleware(['permission:manage reservations'])->only(['destroy']);
+    }
+
     public function index()
     {
 
