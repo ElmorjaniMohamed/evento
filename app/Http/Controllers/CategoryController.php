@@ -12,7 +12,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::latest()->paginate(5);
-        return view('admin.categories.index', compact('categories'))->with('i', (request()->input('page', 1) - 1) * 5);;
+        return view('admin.categories.index', compact('categories'))->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     public function create()
@@ -60,7 +60,7 @@ class CategoryController extends Controller
             return response()->json(['status' => 'error', 'message' => 'Category not found'], 404);
         }
     } else {
-        
+
         return response()->json(['status' => 'error', 'message' => 'Unauthorized'], 401);
     }
 }

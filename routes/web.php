@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
@@ -35,4 +36,5 @@ require __DIR__.'/auth.php';
 
 Route::prefix('admin')->middleware(['auth'])->group(function () {
     Route::resource('categories', CategoryController::class);
+    Route::resource('events', EventController::class);
 });

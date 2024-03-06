@@ -148,9 +148,9 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#"
-                            class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                            <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                        <a href="{{route('events.index')}}"
+                            class="flex items-center p-2 text-slate-50 rounded-lg dark:text-slate-50 hover:text-orange-500 hover:bg-slate-100 dark:hover:bg-gray-700 group {{ request()->routeIs('events.index', 'events.create', 'events.edit') ? 'bg-orange-500 text-slate-50' : '' }}">
+                            <svg class="flex-shrink-0 w-5 h-5 text-slate-50 transition duration-75 dark:text-slate-50 group-hover:text-orange-500 dark:group-hover:text-white"
                                 aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                                 viewBox="0 0 20 20">
                                 <path

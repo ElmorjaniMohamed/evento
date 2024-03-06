@@ -26,7 +26,7 @@ class EventRequest extends FormRequest
             'description' => 'required|string',
             'date' => 'required|date|after_or_equal:today',
             'location' => 'required|string',
-            'image' => 'required|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'places_available' => 'required|integer|min:0',
             'tickets_booked' => 'integer|min:0',
             'price' => 'required|numeric|min:0',
