@@ -32,7 +32,7 @@ class EventRequest extends FormRequest
             'price' => 'required|numeric|min:0',
             'status' => 'required|in:Pending,Accepted,Rejected',
             'type_reservation' => 'required|in:manual,automatic',
-            'category_id' => 'required|exists:categories,id'
+            'category_id' => 'required|exists:categories,id',
         ];
     }
 

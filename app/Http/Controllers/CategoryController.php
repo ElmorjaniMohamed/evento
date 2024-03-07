@@ -9,13 +9,13 @@ use Illuminate\Http\JsonResponse;
 
 class CategoryController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware(['permission:view categories'])->only(['index', 'show']);
-        $this->middleware(['permission:create categories'])->only(['create', 'store']);
-        $this->middleware(['permission:manage categories'])->only(['edit', 'update']);
-        $this->middleware(['permission:delete categories'])->only(['destroy']);
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware(['permission:view categories'])->only(['index', 'show']);
+    //     $this->middleware(['permission:create categories'])->only(['create', 'store']);
+    //     $this->middleware(['permission:manage categories'])->only(['edit', 'update']);
+    //     $this->middleware(['permission:delete categories'])->only(['destroy']);
+    // }
     public function index()
     {
         $categories = Category::latest()->paginate(5);

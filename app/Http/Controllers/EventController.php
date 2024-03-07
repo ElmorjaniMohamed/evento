@@ -11,14 +11,14 @@ use Illuminate\Support\Facades\Storage;
 
 class EventController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-        $this->middleware(['permission:view events|filter events|search events|view details|reserve place|generate ticket'])->only(['index', 'show']);
-        $this->middleware(['permission:create events'])->only(['create', 'store']);
-        $this->middleware(['permission:manage events'])->only(['edit', 'update']);
-        $this->middleware(['permission:manage reservations'])->only(['destroy']);
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    //     $this->middleware(['permission:view events|filter events|search events|view details|reserve place|generate ticket'])->only(['index', 'show']);
+    //     $this->middleware(['permission:create events'])->only(['create', 'store']);
+    //     $this->middleware(['permission:manage events'])->only(['edit', 'update']);
+    //     $this->middleware(['permission:manage reservations'])->only(['destroy']);
+    // }
 
     public function index()
     {
@@ -27,22 +27,53 @@ class EventController extends Controller
 
         $categories = Category::all();
 
-        return view('admin.events.index', compact('events', 'categories'))
+        return view('organizer.events.index', compact('events', 'categories'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
+    }
+    public function events()
+    {
+        $events = Event::where('status', 'Accepted')->get();
+        $categories = Category::all();
+        return view('events', compact('events', 'categories'));
+    }
+
+    public function manage()
+    {
+        $events = Event::where('status', 'pending')->with('category')->paginate(5);
+
+        return view('admin.events.manage', compact('events'));
+    }
+
+    public function accept(Request $request, $id)
+    {
+        $event = Event::findOrFail($id);
+
+        $event->update(['status' => 'Accepted']);
+
+        return redirect()->back();
+    }
+
+    public function reject(Request $request, $id)
+    {
+        $event = Event::findOrFail($id);
+
+        $event->update(['status' => 'Rejected']);
+
+        return redirect()->back();
     }
 
     public function create()
     {
         $categories = Category::all();
-        return view('admin.events.create', compact('categories'));
+        return view('organizer.events.create', compact('categories'));
     }
 
     public function store(EventRequest $request)
     {
+
         $imageName = null;
 
         if ($request->hasFile('image')) {
-
             $file = $request->file('image');
             $extension = $file->getClientOriginalExtension();
             $fileName = time() . '.' . $extension;
@@ -56,6 +87,8 @@ class EventController extends Controller
         $validatedData['image'] = $imageName;
         $validatedData['tickets_booked'] = 0;
 
+        $validatedData['user_id'] = auth()->user()->id;
+
         Event::create($validatedData);
 
         return redirect()->route('events.index');
@@ -66,14 +99,14 @@ class EventController extends Controller
     public function show($id)
     {
         $event = Event::findOrFail($id);
-        return view('events.show', compact('event'));
+        return view('organizer.events.show', compact('event'));
     }
 
     public function edit($id)
     {
         $event = Event::findOrFail($id);
         $categories = Category::all();
-        return view('admin.events.edit', compact('event', 'categories'));
+        return view('organizer.events.edit', compact('event', 'categories'));
     }
 
     public function update(EventRequest $request, $id)

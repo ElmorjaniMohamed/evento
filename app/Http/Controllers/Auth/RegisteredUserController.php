@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use Spatie\Permission\Models\Role;
 
 class RegisteredUserController extends Controller
 {
@@ -52,17 +53,23 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
+        if ($request->has('user_role')) {
+            $roleName = $request->user_role;
+            $role = Role::where('name', $roleName)->first();
+
+            if ($role) {
+                $user->assignRole($role);
+            }
+        }
+
         event(new Registered($user));
 
-        Auth::login($user);
-
-        if ($user->hasRole('admin') || $user->hasRole('organize')) {
-            return redirect('dashbord');
-        }
-        if ($user->hasRole('User')) {
+        if ($user->hasRole('admin') || $user->hasRole('organizer')) {
+            return redirect('dashboard');
+        } elseif ($user->hasRole('user')) {
             return redirect()->intended('home');
+        } else {
+            return redirect('/login');
         }
-
-        return redirect('/login');
     }
 }
