@@ -83,7 +83,7 @@
             </div>
         </div>
     </div>
-    <div class=" bg-orange-500 dark:bg-gray-800 h-fit relative shadow-md mt-4 sm:rounded-lg overflow-hidden">
+    {{-- <div class=" bg-orange-500 dark:bg-gray-800 h-fit relative shadow-md mt-4 sm:rounded-lg overflow-hidden">
         <div class="flex items-center justify-start py-2 ml-3">
             <div class="rounded-full bg-blue-500 p-1.5 mr-2"></div>
             <h2 class="text-md font-somibold  text-slate-100">Statistics Overview</h2>
@@ -94,5 +94,5 @@
                 <canvas id="doughnutChart" class="rounded-lg" width="400" height="400"></canvas>
             </div>
         </div>
-    </div>
+    </div> --}}
 @endsection

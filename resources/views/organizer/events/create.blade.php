@@ -16,6 +16,7 @@
                 <div class="grid gap-4 mb-4 sm:grid-cols-2">
                     <input type="hidden" name="status" value="Pending">
                     <input type="hidden" name="tickets_booked" value="0">
+                    
                     <div>
                         <label for="title" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                             Title

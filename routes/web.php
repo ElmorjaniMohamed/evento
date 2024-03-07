@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
@@ -16,11 +17,9 @@ use App\Http\Controllers\CategoryController;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-})->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
-
+Route::get('/events', [EventController::class, 'events'])->name('events');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -32,9 +31,16 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
 Route::prefix('admin')->middleware(['auth'])->group(function () {
     Route::resource('categories', CategoryController::class);
+    Route::get('events', [EventController::class, 'manage'])->name('events.manage');
+    Route::post('events/{id}/accept', [EventController::class, 'accept'])->name('events.accept');
+    Route::post('events/{id}/reject', [EventController::class, 'reject'])->name('events.reject');
+
+});
+
+Route::prefix('organizer')->middleware(['auth'])->group(function () {
     Route::resource('events', EventController::class);
 });

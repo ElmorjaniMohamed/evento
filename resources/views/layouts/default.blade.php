@@ -16,9 +16,13 @@
     <link rel="stylesheet" href="assets/css/swiper-bundle.min.css">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @vite(['node_modules/flowbite/dist/flowbite.min.js'])
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
-<body class="bg-[url('/public/assets/images/background/bg-element-3.jpg')] home-3 counter-scroll dark:bg-none dark:bg-gray-900">
+<body
+    class="bg-[url('/public/assets/images/background/bg-element-3.jpg')] home-3 counter-scroll dark:bg-none dark:bg-gray-900">
 
     <!-- Preloading -->
     <div class="preloader">
@@ -40,10 +44,9 @@
 
     <!-- Header -->
     <header class="relative h-[170px] flex items-center justify-center header-fixed">
-        <nav
-            class=" dark:bg-gray-900 bg-none  fixed w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600">
+        <nav class="transition-colors duration-300 dark:bg-gray-900 bg-none  fixed w-full z-20 top-0 start-0 ">
             <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-                <a href="" class="flex items-center space-x-3 rtl:space-x-reverse">
+                <a href="{{ route('home') }}" class="flex items-center space-x-3 rtl:space-x-reverse">
                     <img src="assets/images/logo.svg" class="h-8" alt="Logo">
                 </a>
                 <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
@@ -70,19 +73,18 @@
                                         aria-expanded="false" data-dropdown-toggle="dropdown-user">
                                         <span class="sr-only">Open user menu</span>
                                         <img class="w-8 h-8 rounded-full"
-                                            src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
-                                            alt="user photo">
+                                            src="{{ asset('storage/avatars/' . Auth::user()->image) }}" alt="User Photo">
                                     </button>
                                 </div>
                                 <div class="z-50 hidden my-4 text-base list-none bg-orange-500 divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600"
                                     id="dropdown-user">
                                     <div class="px-4 py-3" role="none">
                                         <p class="text-sm text-slate-100 dark:text-white" role="none">
-                                            Neil Sims
+                                            {{ Auth::user()->name }}
                                         </p>
                                         <p class="text-sm font-medium text-slate-100 truncate dark:text-gray-300"
                                             role="none">
-                                            neil.sims@flowbite.com
+                                            {{ Auth::user()->email }}
                                         </p>
                                     </div>
                                     <ul class="py-1" role="none">
@@ -92,17 +94,18 @@
                                                 role="menuitem">Dashboard</a>
                                         </li>
                                         <li>
-                                            <a href="{{route('profile.edit')}}"
+                                            <a href="{{ route('profile.edit') }}"
                                                 class="block px-4 py-2 text-sm text-slate-50 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
                                                 role="menuitem">Profile</a>
                                         </li>
                                         <li>
                                             <form method="POST" action="{{ route('logout') }}">
                                                 @csrf
-                                                <a href="route('logout')" onclick="event.preventDefault();
+                                                <a href="route('logout')"
+                                                    onclick="event.preventDefault();
                                                 this.closest('form').submit();"
-                                                class="block px-4 py-2 text-sm text-slate-50 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                                                role="menuitem">Sign out</a>
+                                                    class="block px-4 py-2 text-sm text-slate-50 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+                                                    role="menuitem">Sign out</a>
                                             </form>
 
                                         </li>
@@ -129,8 +132,8 @@
                     <ul
                         class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-none md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
                         <li>
-                            <a href="#"
-                                class="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-orange-500 md:p-0 md:dark:text-orange-500"
+                            <a href="{{ route('home') }}"
+                                class="block py-2 px-3 rounded md:bg-transparent md:p-0 {{ request()->routeIs('home') ? 'text-orange-500' : '' }}"
                                 aria-current="page">Home</a>
                         </li>
                         <li>
@@ -138,8 +141,8 @@
                                 class="block py-2 px-3 text-slate-50 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-orange-500 md:p-0 md:dark:hover:text-orange-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">About</a>
                         </li>
                         <li>
-                            <a href="#"
-                                class="block py-2 px-3 text-slate-50 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-orange-500 md:p-0 md:dark:hover:text-orange-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Services</a>
+                            <a href="{{ route('events') }}"
+                                class="block py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-orange-500 md:p-0 md:dark:hover:text-orange-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 {{ request()->routeIs('events') ? 'text-orange-500' : '' }}">Events</a>
                         </li>
                         <li>
                             <a href="#"
@@ -147,6 +150,7 @@
                         </li>
                     </ul>
                 </div>
+            </div>
         </nav>
     </header>
     <!-- end Header -->
@@ -170,17 +174,21 @@
                                 pariatur.
                             </p>
                             <ul class="flex items-center mt-[30px] justify-start">
-                                <li class="social-icons hover:bg-orange-500 !w-[54px] !h-[54px] min-w-[54px] !mr-[6px] ml-0">
+                                <li
+                                    class="social-icons hover:bg-orange-500 !w-[54px] !h-[54px] min-w-[54px] !mr-[6px] ml-0">
                                     <a class="hover:text-[#fff]" href="#"><i class="fab fa-facebook-f"></i></a>
                                 </li>
-                                <li class="social-icons hover:bg-orange-500 !w-[54px] !h-[54px] min-w-[54px] !mx-[6px]">
+                                <li
+                                    class="social-icons hover:bg-orange-500 !w-[54px] !h-[54px] min-w-[54px] !mx-[6px]">
                                     <a class="hover:text-[#fff]" href="#"><i class="fab fa-twitter"></i></a>
                                 </li>
-                                <li class="social-icons hover:bg-orange-500 !w-[54px] !h-[54px] min-w-[54px] !mx-[6px]">
+                                <li
+                                    class="social-icons hover:bg-orange-500 !w-[54px] !h-[54px] min-w-[54px] !mx-[6px]">
                                     <a class="hover:text-[#fff]" href="#"><i
                                             class="fab fa-linkedin-in"></i></a>
                                 </li>
-                                <li class="social-icons hover:bg-orange-500 !w-[54px] !h-[54px] min-w-[54px] !ml-[6px] mr-0">
+                                <li
+                                    class="social-icons hover:bg-orange-500 !w-[54px] !h-[54px] min-w-[54px] !ml-[6px] mr-0">
                                     <a class="hover:text-[#fff]" href="#"><i class="fab fa-youtube"></i></a>
                                 </li>
                             </ul>
@@ -283,6 +291,17 @@
                 html.classList.add(newTheme);
             });
         }
+    </script>
+
+    <script>
+        window.addEventListener('scroll', function() {
+            var navbar = document.querySelector('nav');
+            if (window.scrollY > 0) {
+                navbar.classList.add('bg-[#15005D]', 'shadow');
+            } else {
+                navbar.classList.remove('bg-[#15005D]', 'shadow');
+            }
+        });
     </script>
 
 </body>
