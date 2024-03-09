@@ -3,58 +3,73 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ReservationRequest;
+use App\Models\Event;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ReservationController extends Controller
 {
-
-    public function __construct()
+    public function index()
     {
-        $this->middleware('permission:view events|filter events|search events|view details|reserve place|generate ticket')->only('show');
-        $this->middleware('permission:create events|manage events|view own event stats|manage reservations')->only('store');
-        $this->middleware('permission:validate events')->only('accept', 'reject');
+        $reservations = Reservation::where('status', 'Pending')->get();
+        return view('organizer.reservations.index', compact('reservations'));
     }
-    public function show(Reservation $reservation)
+    public function reserve(Request $request, $eventId)
     {
-        if (!Auth::user()->can('view', $reservation)) {
-            abort(403, 'Unauthorized action.');
+        $event = Event::findOrFail($eventId);
+        $userId = auth()->id();
+
+        $existingReservation = Reservation::where('user_id', $userId)
+            ->where('event_id', $eventId)
+            ->first();
+
+        if ($existingReservation) {
+            return redirect()->back()->with('message', 'You have already reserved this event.');
         }
 
-        return view('reservations.show', compact('reservation'));
-    }
+        if ($event->type_reservation === 'automatic') {
+            Reservation::create([
+                'user_id' => $userId,
+                'event_id' => $eventId,
+                'status' => 'Confirmed',
+            ]);
 
-    public function store(ReservationRequest $request)
-    {
-        $validatedData = $request->validated();
+            return redirect()->back()->with('success', 'Event reserved successfully.');
+        } else {
+            Reservation::create([
+                'user_id' => $userId,
+                'event_id' => $eventId,
+                'status' => 'Pending',
+            ]);
 
-        $validatedData['user_id'] = Auth::id();
-
-        Reservation::create($validatedData);
-
-        return redirect()->route('home')->with('success', 'Reservation created successfully.');
-    }
-
-    public function accept(Reservation $reservation)
-    {
-        if (!Auth::user()->can('accept', $reservation)) {
-            abort(403, 'Unauthorized action.');
+            return redirect()->back()->with('message', 'Reservation is pending for approval.');
         }
-
-        $reservation->update(['status' => 'Accepted']);
-
-        return redirect()->route('home')->with('success', 'Reservation accepted successfully.');
     }
 
-    public function reject(Reservation $reservation)
+
+    /**
+     * Confirm a reservation.
+     */
+    public function confirm($reservationId)
     {
-        if (!Auth::user()->can('reject', $reservation)) {
-            abort(403, 'Unauthorized action.');
-        }
+        $reservation = Reservation::findOrFail($reservationId);
+        $reservation->status = 'Confirmed';
+        $reservation->save();
 
-        $reservation->update(['status' => 'Rejected']);
-
-        return redirect()->route('home')->with('success', 'Reservation rejected successfully.');
+        return redirect()->back()->with('success', 'Reservation confirmed successfully.');
     }
+
+    /**
+     * Cancel a reservation.
+     */
+    public function cancel($reservationId)
+    {
+        $reservation = Reservation::findOrFail($reservationId);
+        $reservation->status = 'Cancelled';
+        $reservation->save();
+
+        return redirect()->back()->with('success', 'Reservation cancelled successfully.');
+    }
+
 }

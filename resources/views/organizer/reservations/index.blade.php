@@ -51,50 +51,26 @@
             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400" id="eventTable">
                 <thead class="text-xs w-full text-slate-50 uppercase bg-orange-500 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
-                        <th scope="col" class="px-4 py-4">Title</th>
-                        <th scope="col" class="px-4 py-3">Description</th>
+                        <th scope="col" class="px-4 py-4">User</th>
+                        <th scope="col" class="px-4 py-3">Event</th>
                         <th scope="col" class="px-4 py-3">Date</th>
-                        <th scope="col" class="px-4 py-3">Location</th>
-                        <th scope="col" class="px-4 py-3">Image</th>
-                        <th scope="col" class="px-4 py-3">Places</th>
-                        <th scope="col" class="px-4 py-3">TB</th>
-                        <th scope="col" class="px-4 py-3">Price</th>
-                        <th scope="col" class="px-4 py-3">Status</th>
-                        <th scope="col" class="px-4 py-3">TR</th>
-                        <th scope="col" class="px-4 py-3">
+                        <th>
                             <span class="sr-only">Actions</span>
                         </th>
                     </tr>
                 </thead>
                 <tbody id="eventTableBody">
-                    @foreach ($events as $event)
-                        <tr class="border-b dark:border-gray-700" id="{{ 'event_' . $event->id }}">
+                    @foreach($reservations as $reservation)
+                        <tr class="border-b dark:border-gray-700" id="{{ 'event_' . $reservation->id }}">
                             <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                {{ $event->title }}
+                                {{ $reservation->user->name }}
                             </td>
                             <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                {{ $event->description }}
+                                {{ $reservation->event->title }}
                             </td>
-                            <td class="px-4 py-3 max-w-[12rem] truncate">{{ $event->date }}</td>
-                            <td class="px-4 py-3">{{ $event->location }}</td>
-                            <td class="px-4 py-3">
-                                @if ($event->image)
-                                    <img src="{{ asset('storage/events/' . $event->image) }}" alt="Event Image"
-                                        class="w-10 h-10 rounded">
-                                @else
-                                    <span>No Image</span>
-                                @endif
-                            </td>
-                            <td class="px-4 py-3">{{ $event->places_available }}</td>
-                            <td class="px-4 py-3 ">{{ $event->tickets_booked }}</td>
-                            <td class="px-4 py-3">{{ $event->price }}</td>
-                            <td class="px-4 py-3">
-                                <span
-                                    class="bg-yellow-100 text-yellow-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-yellow-900 dark:text-yellow-300">{{ $event->status }}</span>
-                            </td>
-                            <td class="px-4 py-3">{{ $event->type_reservation }}</td>
+                            <td class="px-4 py-3 max-w-[12rem] truncate">{{ $reservation->created_at->format('Y-m-d') }}</td>
                             <td class="px-4 py-6 flex flex-row items-center justify-center">
-                                <form action="{{ route('events.accept', $event->id) }}" method="POST">
+                                <form action="{{ route('reservations.confirm', $reservation->id) }}" method="POST">
                                     @csrf
                                     <button type="submit" class="btn-accept">
                                         <svg class="w-5 h-5 text-green-500" fill="none" viewBox="0 0 24 24"
@@ -104,7 +80,7 @@
                                         </svg>
                                     </button>
                                 </form>
-                                <form action="{{ route('events.reject', $event->id) }}" method="POST">
+                                <form action="{{ route('reservations.cancel', $reservation->id) }}" method="POST">
                                     @csrf
                                     <button type="submit" class="btn-reject">
                                         <svg class="w-5 h-5 text-red-500" fill="none" viewBox="0 0 24 24"
@@ -133,4 +109,5 @@
         </div>
     </div>
     <!-- End coding here -->
+
 @endsection

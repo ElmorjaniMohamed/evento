@@ -3,6 +3,7 @@
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReservationController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 
@@ -20,10 +21,13 @@ use App\Http\Controllers\CategoryController;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/events', [EventController::class, 'events'])->name('events');
+Route::get('/search', [EventController::class, 'search']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::post('/events/{eventId}/reserve', [ReservationController::class, 'reserve'])->name('events.reserve');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -43,4 +47,7 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
 
 Route::prefix('organizer')->middleware(['auth'])->group(function () {
     Route::resource('events', EventController::class);
+    Route::get('reservations', [ReservationController::class, 'index'])->name('reservations.index');
+    Route::post('reservations/{id}/confirm', [ReservationController::class, 'confirm'])->name('reservations.confirm');
+    Route::post('reservations/{id}/cancel', [ReservationController::class, 'cancel'])->name('reservations.cancel');
 });
