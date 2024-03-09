@@ -30,9 +30,16 @@ class EventController extends Controller
         return view('organizer.events.index', compact('events', 'categories'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
     }
-    public function events()
+
+    public function events(Request $request)
     {
-        $events = Event::where('status', 'Accepted')->get();
+        if ($request->ajax()) {
+            $events = Event::where('status', 'Accepted')->paginate(2);
+            $categories = Category::all();
+            return view('events', compact('events', 'categories'))->render();
+        }
+        
+        $events = Event::where('status', 'Accepted')->paginate(2);
         $categories = Category::all();
         return view('events', compact('events', 'categories'));
     }
@@ -93,8 +100,6 @@ class EventController extends Controller
 
         return redirect()->route('events.index');
     }
-
-
 
     public function show($id)
     {
@@ -166,5 +171,21 @@ class EventController extends Controller
 
             return response()->json(['status' => 'error', 'message' => 'Unauthorized'], 401);
         }
+    }
+    public function search(Request $request)
+    {
+
+        $keyword = $request->input('keyword');
+
+        $events = Event::when($keyword, function ($query) use ($keyword) {
+            return $query->where('title', 'like', '%' . $keyword . '%');
+        })->paginate(3);
+
+
+        if ($request->ajax()) {
+            return view('pagination', compact('events'))->render();
+        }
+
+        return view('events', compact('events'));
     }
 }
