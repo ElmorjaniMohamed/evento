@@ -7,13 +7,13 @@
             <div class="grid grid-cols-2 gap-4 mb-4">
                 <div class="bg-none border-2 border-orange-500 outline-none rounded-lg p-4 flex items-center space-x-4">
                     <input id="user_role_user" type="radio" value="User" name="user_role"
-                        class="text-orange-500 focus:ring-orange-500 dark:focus:ring-orange-500">
+                        class="text-orange-500 focus:ring-orange-500 dark:focus:ring-orange-500"  required>
                     <label for="user_role_user" class="text-sm font-medium text-gray-900 dark:text-gray-300">I'm a
                         Spectator</label>
                 </div>
                 <div class="bg-none border-2 border-orange-500 outline-none rounded-lg p-4 flex items-center space-x-4">
                     <input id="user_role_organizer" type="radio" value="Organizer" name="user_role"
-                        class="text-orange-500 focus:ring-orange-500 dark:focus:ring-orange-500">
+                        class="text-orange-500 focus:ring-orange-500 dark:focus:ring-orange-500"  required>
                     <label for="user_role_organizer" class="text-sm font-medium text-gray-900 dark:text-gray-300">I'm an
                         Organizer</label>
                 </div>

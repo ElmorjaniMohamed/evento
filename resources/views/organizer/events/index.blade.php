@@ -67,7 +67,7 @@
                         <th scope="col" class="px-4 py-3">Image</th>
                         <th scope="col" class="px-4 py-3">Places</th>
                         <th scope="col" class="px-4 py-3">TB</th>
-                        <th scope="col" class="px-4 py-3">Price</th>
+                        <th scope="col" class="px-4 py-3">Price(DH)</th>
                         <th scope="col" class="px-4 py-3">Status</th>
                         <th scope="col" class="px-4 py-3">TR</th>
                         <th scope="col" class="px-4 py-3">
@@ -79,11 +79,15 @@
                     @foreach ($events as $event)
                     @if ($event->user_id == auth()->user()->id)
                         <tr class="border-b dark:border-gray-700" id="{{ 'event_' . $event->id }}">
-                            <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                {{ $event->title }}
+                            <td class="px-4 py-3 font-medium text-gray-900 w-8 dark:text-white">
+                                <div class="truncate w-44">
+                                    {{ $event->title }}
+                                </div>
                             </td>
-                            <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                {{ $event->description }}
+                            <td class="px-4 py-3 font-medium text-gray-900 truncate w-8 dark:text-white">
+                                <div class="truncate w-96">
+                                    {{ $event->description }}
+                                </div>
                             </td>
                             <td class="px-4 py-3 max-w-[12rem] truncate">{{ $event->date }}</td>
                             <td class="px-4 py-3">{{ $event->location }}</td>

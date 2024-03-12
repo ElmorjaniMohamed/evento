@@ -1,33 +1,8 @@
 @extends('layouts.default')
 
-@if (session('success'))
-    <div x-data="{ open: true }" x-show="open"
-        class="flex items-center p-2.5 bottom-0 right-0 rounded text-green-800 bg-green-100 dark:bg-green-300">
-        <span class="ltr:pr-2 rtl:pl-2"><strong class="ltr:mr-1 rtl:ml-1">Success!</strong>{{ session('success') }}</span>
-        <button type="button" class="ltr:ml-auto rtl:mr-auto hover:opacity-80" @click="open = false">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5">
-                <line x1="18" y1="6" x2="6" y2="18"></line>
-                <line x1="6" y1="6" x2="18" y2="18"></line>
-            </svg>
-        </button>
-    </div>
-@endif
-
-@if (session('message'))
-    <div x-data="{ open: true }" x-show="open"
-        class="flex items-center fixed top-0 right-0 p-2.5 z-50 m-4 rounded text-yellow-800 bg-yellow-100/95 ">
-        <span class="ltr:pr-2 rtl:pl-2 text-[1rem] font-medium"><strong class="ltr:mr-1 rtl:ml-1 font-semibold">Pending!
-            </strong>{{ session('message') }}</span>
-        <button type="button" class="ltr:ml-auto rtl:mr-auto hover:opacity-80" @click="open = false">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5">
-                <line x1="18" y1="6" x2="6" y2="18"></line>
-                <line x1="6" y1="6" x2="18" y2="18"></line>
-            </svg>
-        </button>
-    </div>
-@endif
+@include('components.alert-warning', ['message' => session('warning')])
+@include('components.alert-danger', ['message' => session('danger')])
+@include('components.alert-success', ['message' => session('success')])
 
 @section('content')
     <!-- PageTitle -->
@@ -109,8 +84,14 @@
     <section class="">
         <div class="pt-1 py-[11px] max-[499px]:pt-[60px]">
             <div class="container" id="events-container">
-                <div class="grid grid-cols-1 gap-8 md:grid-cols-3 lg:grid-cols-3" id="events">
+                <div class="grid grid-cols-1 gap-8 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3" id="events">
                     @include('pagination')
+                </div>
+                <div class="">
+                    <div class="text-slate-100 mt-2 ">
+                        <div class="text-slate-100 mt-2 bg-none dark:bg-gray-800 rounded-[20px] px-[30px] py-2 ">
+                        {!! $events->links() !!}
+                    </div>
                 </div>
             </div>
         </div>
@@ -119,7 +100,7 @@
 
     <!-- Action -->
     <section class="tf-section action">
-        <div class="pt-[149px] py-[122px] max-[499px]:py-[60px]">
+        <div class="pt-[60px] py-[122px] max-[499px]:py-[60px]">
             <div class="container">
                 <div class="row">
                     <div class="col-12">
@@ -138,27 +119,6 @@
         </div>
     </section>
     <!-- end Action -->
-    <script>
-        $(document).ready(function() {
-            $(document).on('click', '.pagination a', function(event) {
-                event.preventDefault();
-                var page = $(this).attr('href').split('page=')[1];
-                getMoreEvents(page);
-            });
-        });
-
-        function getMoreEvents(page) {
-            $.ajax({
-                type: "GET",
-                url: "{{ route('events') }}",
-                data: { page: page }, 
-                success: function(data) {
-                    $('#events').html(data);
-                }
-            });
-        }
-    </script>
-
 
     <script>
         $(document).ready(function() {

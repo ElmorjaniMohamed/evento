@@ -8,10 +8,8 @@
             </a>
         </div>
         <div class="pt-4 pb-6">
-            <a href="blog-single.html" class="text-lg mt-2 leading-6">{{ $event->title }}</a>
+            <a href="blog-single.html" class="text-lg mt-2 leading-6 truncate w-80">{{ $event->title }}</a>
             <ul class="flex flex-col justify-start space-y-1 mt-3">
-                <li><a class="block text-base" href="#"><i
-                            class="fa fa-user text-tf mr-2 "></i>{{ $event->user->name }}</a></li>
                 <li><a href="" class="block text-base"><i
                             class="fa-solid fa-location-dot text-tf mr-2"></i>{{ $event->location }}</a>
                 </li>
@@ -23,7 +21,7 @@
             </ul>
         </div>
         <div class="flex items-center justify-between relative">
-            <a
+            <a href="{{route('events.overview', $event->id)}}"
                 class="font-somibold text-sm text-slate-50 dark:text-white before::content-[''] before:w-[36px] before:h-[3px] before:absolute before:bottom-0 before:left-0 before:bg-[#fd562a]">Read
                 More</a>
             <form action="{{ route('events.reserve', ['eventId' => $event->id]) }}" method="POST">
@@ -34,12 +32,7 @@
         </div>
     </div>
 @endforeach
-<div class="col-start-1 col-end-5">
-    <div class="text-slate-100 mt-2 ">
-        <div class="text-slate-100 mt-2 bg-slate-100 dark:bg-gray-800 rounded-[20px] px-[30px] py-2 ">
-        {!! $events->links() !!}
-    </div>
-</div>
+
 
 
 

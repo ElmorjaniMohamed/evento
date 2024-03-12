@@ -25,7 +25,11 @@ class ReservationController extends Controller
             ->first();
 
         if ($existingReservation) {
-            return redirect()->back()->with('message', 'You have already reserved this event.');
+            return redirect()->back()->with('danger', 'You have already reserved this event.');
+        }
+
+        if ($event->tickets_booked >= $event->places_available) {
+            return redirect()->back()->with('warning', 'Maximum tickets reached.');
         }
 
         if ($event->type_reservation === 'automatic') {
@@ -35,6 +39,9 @@ class ReservationController extends Controller
                 'status' => 'Confirmed',
             ]);
 
+            // Increment the number of tickets booked for the event
+            $event->increment('tickets_booked');
+
             return redirect()->back()->with('success', 'Event reserved successfully.');
         } else {
             Reservation::create([
@@ -43,9 +50,10 @@ class ReservationController extends Controller
                 'status' => 'Pending',
             ]);
 
-            return redirect()->back()->with('message', 'Reservation is pending for approval.');
+            return redirect()->back()->with('warning', 'Reservation is pending for approval.');
         }
     }
+
 
 
     /**
@@ -56,6 +64,9 @@ class ReservationController extends Controller
         $reservation = Reservation::findOrFail($reservationId);
         $reservation->status = 'Confirmed';
         $reservation->save();
+
+        $event = $reservation->event;
+        $event->increment('tickets_booked');
 
         return redirect()->back()->with('success', 'Reservation confirmed successfully.');
     }

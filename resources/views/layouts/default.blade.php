@@ -9,17 +9,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
     {{-- <link rel="stylesheet" href="assets/css/bootstrap.min.css"> --}}
-    <link rel="stylesheet" href="assets/font/font-awesome.css">
-    <link rel="shortcut icon" href="assets/images/favicon.png">
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/aos.css">
-    <link rel="stylesheet" href="assets/css/swiper-bundle.min.css">
+    <link rel="stylesheet" href="{{asset('assets/font/font-awesome.css')}}">
+    <link rel="shortcut icon" href="{{asset('assets/images/favicon.png')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/aos.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/swiper-bundle.min.css')}}">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @vite(['node_modules/flowbite/dist/flowbite.min.js'])
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
         integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 
 <body
@@ -28,7 +28,7 @@
     <!-- Preloading -->
     <div class="preloader">
         <div class="icon">
-            <img src="assets/images/favicon.png" alt="">
+            <img src="{{asset('assets/images/favicon.png')}}" alt="">
         </div>
     </div>
     <!-- end Preloading -->
@@ -44,11 +44,11 @@
     <!-- end Scroll Top -->
 
     <!-- Header -->
-    <header class="relative h-[90px] flex items-center justify-center header-fixed">
+    <header class="relative h-[96px] flex items-center justify-center header-fixed">
         <nav class="transition-colors duration-300 dark:bg-gray-900 bg-none  fixed w-full z-20 top-0 start-0 ">
             <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
                 <a href="{{ route('home') }}" class="flex items-center space-x-3 rtl:space-x-reverse">
-                    <img src="assets/images/logo.svg" class="h-8" alt="Logo">
+                    <img src="{{asset('assets/images/logo.svg')}}" class="h-8" alt="Logo">
                 </a>
                 <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
                     <button id="theme-mode"
@@ -65,7 +65,7 @@
                                 d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" />
                         </svg>
                     </button>
-                    @if (Route::has('login'))
+                    @if (Route::has('login') || Route::has('register'))
                         @auth
                             <div class="flex items-center ms-3">
                                 <div>
@@ -89,11 +89,13 @@
                                         </p>
                                     </div>
                                     <ul class="py-1" role="none">
-                                        <li>
-                                            <a href="{{ url('/dashboard') }}"
-                                                class="block px-4 py-2 text-sm text-slate-50 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                                                role="menuitem">Dashboard</a>
-                                        </li>
+                                        @if (auth()->user()->hasRole('Administrator') || auth()->user()->hasRole('Organizer'))
+                                            <li>
+                                                <a href="{{ url('/dashboard') }}"
+                                                    class="block px-4 py-2 text-sm text-slate-50 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+                                                    role="menuitem">Dashboard</a>
+                                            </li>
+                                        @endif
                                         <li>
                                             <a href="{{ route('profile.edit') }}"
                                                 class="block px-4 py-2 text-sm text-slate-50 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
@@ -169,12 +171,12 @@
                     class="footer__body flex text-left flex-wrap pb-[120px] !px-[15px] border-b-[1px] border-solid border-b-[rgba(255,255,255,0.18)] ">
                     <div class="col-xl-3 col-md-6 col-12 p-0">
                         <div class="info">
-                            <img src="assets/images/logo.png" alt="Monteno">
+                            <img src="{{asset('assets/images/logo.png')}}" alt="Monteno">
                             <p class="text-[18px] leading-[1.7] mt-[23px] mb-[16px]">
                                 Duis aute irure dolor in reprehen derit in voluptate velit esse cillum dolore eu fugiat
                                 pariatur.
                             </p>
-                            <ul class="flex items-center mt-[30px] justify-start">
+                            <ul class="flex items-center mt-[30px] justify-center md:justify-start lg:justify-start ">
                                 <li
                                     class="social-icons hover:bg-orange-500 !w-[54px] !h-[54px] min-w-[54px] !mr-[6px] ml-0">
                                     <a class="hover:text-[#fff]" href="#"><i class="fab fa-facebook-f"></i></a>
@@ -269,14 +271,14 @@
 
 
 
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/js/swiper-bundle.min.js"></script>
-    <script src="assets/js/swiper.js"></script>
-    <script src="assets/js/countto.js"></script>
-    <script src="assets/js/count-down.js"></script>
+    <script src="{{asset('assets/js/jquery.min.js')}}"></script>
+    <script src="{{asset('assets/js/swiper-bundle.min.js')}}"></script>
+    <script src="{{asset('assets/js/swiper.js')}}"></script>
+    <script src="{{asset('assets/js/countto.js')}}"></script>
+    <script src="{{asset('assets/js/count-down.js')}}"></script>
     <script src="assets/js/bootstrap.min.js"></script>
-    <script src="assets/js/aos.js"></script>
-    <script src="assets/js/main.js"></script>
+    <script src="{{asset('assets/js/aos.js')}}"></script>
+    <script src="{{asset('assets/js/main.js')}}"></script>
     <script>
         AOS.init();
     </script>
