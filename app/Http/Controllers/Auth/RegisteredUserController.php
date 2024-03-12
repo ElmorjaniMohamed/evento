@@ -64,10 +64,10 @@ class RegisteredUserController extends Controller
 
         event(new Registered($user));
 
-        if ($user->hasRole('admin') || $user->hasRole('organizer')) {
+        if ($user->hasRole('Administrator') || $user->hasRole('Organizer')) {
             return redirect('dashboard');
-        } elseif ($user->hasRole('user')) {
-            return redirect()->intended('home');
+        } elseif ($user->hasRole('User')) {
+            return redirect()->route('home');
         } else {
             return redirect('/login');
         }

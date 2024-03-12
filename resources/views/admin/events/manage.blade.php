@@ -70,10 +70,14 @@
                     @foreach ($events as $event)
                         <tr class="border-b dark:border-gray-700" id="{{ 'event_' . $event->id }}">
                             <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                {{ $event->title }}
+                                <div class="truncate w-44">
+                                    {{ $event->title }}
+                                </div>
                             </td>
                             <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                {{ $event->description }}
+                                <div class="truncate w-96">
+                                    {{ $event->description }}
+                                </div>
                             </td>
                             <td class="px-4 py-3 max-w-[12rem] truncate">{{ $event->date }}</td>
                             <td class="px-4 py-3">{{ $event->location }}</td>

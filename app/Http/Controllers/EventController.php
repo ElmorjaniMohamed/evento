@@ -8,23 +8,14 @@ use App\Models\Event;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Carbon\Carbon;
 
 class EventController extends Controller
 {
-    // public function __construct()
-    // {
-    //     $this->middleware('auth');
-    //     $this->middleware(['permission:view events|filter events|search events|view details|reserve place|generate ticket'])->only(['index', 'show']);
-    //     $this->middleware(['permission:create events'])->only(['create', 'store']);
-    //     $this->middleware(['permission:manage events'])->only(['edit', 'update']);
-    //     $this->middleware(['permission:manage reservations'])->only(['destroy']);
-    // }
 
     public function index()
     {
-
-        $events = Event::latest()->with('category')->paginate(5);
-
+        $events = Event::latest()->with('category')->paginate(6);
         $categories = Category::all();
 
         return view('organizer.events.index', compact('events', 'categories'))
@@ -33,14 +24,15 @@ class EventController extends Controller
 
     public function events(Request $request)
     {
-        if ($request->ajax()) {
-            $events = Event::where('status', 'Accepted')->paginate(2);
-            $categories = Category::all();
-            return view('events', compact('events', 'categories'))->render();
-        }
-        
-        $events = Event::where('status', 'Accepted')->paginate(2);
+        $now = Carbon::now();
+        // dd(Carbon::now()->format('Y-m-d H:i:s'));
+
+        $events = Event::where('status', 'Accepted')
+            ->where('date', '>=', $now)
+            ->paginate(9);
+
         $categories = Category::all();
+
         return view('events', compact('events', 'categories'));
     }
 
@@ -105,6 +97,12 @@ class EventController extends Controller
     {
         $event = Event::findOrFail($id);
         return view('organizer.events.show', compact('event'));
+    }
+
+    public function overview($id)
+    {
+        $event = Event::findOrFail($id);
+        return view('pages.overview', compact('event'));
     }
 
     public function edit($id)
@@ -179,7 +177,7 @@ class EventController extends Controller
 
         $events = Event::when($keyword, function ($query) use ($keyword) {
             return $query->where('title', 'like', '%' . $keyword . '%');
-        })->paginate(3);
+        })->paginate(9);
 
 
         if ($request->ajax()) {
@@ -188,4 +186,6 @@ class EventController extends Controller
 
         return view('events', compact('events'));
     }
+
+
 }

@@ -53,4 +53,16 @@ class User extends Authenticatable
     {
         return $this->hasMany(Event::class);
     }
+
+    public function block()
+    {
+        $this->blocked = true;
+        $this->save();
+    }
+
+    public function unblock()
+    {
+        $this->blocked = false;
+        $this->save();
+    }
 }
