@@ -4,6 +4,7 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\StatisticController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
@@ -37,6 +38,7 @@ Route::get('/dashboard', function () {
     abort(403, 'Unauthorized action.');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::get('/dashboard', [StatisticController::class, 'eventStatistics'])->name('dashboard');
 
 
 Route::middleware('auth')->group(function () {
