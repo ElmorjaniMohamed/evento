@@ -36,41 +36,21 @@
                         class="relative pl-[10px] mb-[8px] before:content-[''] before:absolute before:left-0 before:top-[5px] before:w-[3px] before:h-[15px] before:bg-tf before:rounded-[1.5px]">
                         Search</h6>
                     <div class="w-full mx-auto">
+
                         <div class="flex">
-                            <label for="search-dropdown"
-                                class="mb-2 text-sm font-medium text-gray-900 bg-slate-50 hover:bg-gray-900 sr-only dark:text-white">Your
-                                Email</label>
-                            <button id="dropdown-button" data-dropdown-toggle="dropdown"
-                                class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-somibold text-center text-gray-800 dark:text-slate-50  bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-s-lg hover:bg-gray-200 "
-                                type="button">All categories <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true"
-                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="2" d="m1 1 4 4 4-4" />
-                                </svg></button>
-                            <div id="dropdown"
-                                class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
-                                <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdown-button">
-                                    {{-- @foreach ($categories as $category)
-                                        <li>
-                                            <a href=""
-                                                class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{ $category->name }}</a>
-                                        </li>
-                                    @endforeach --}}
-                                </ul>
-                            </div>
+                            <form class="max-w-sm mx-auto">
+                                <select id="categories" name="category"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-l-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    <option value="all">All Categories</option>
+                                    @foreach ($categories as $category)
+                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                    @endforeach
+                                </select>
+                            </form>
                             <div class="relative w-full">
                                 <input type="search" id="search_title"
                                     class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-e-xl border-s-gray-50 border-s-2 border border-gray-300 focus:ring-orange-500 focus:border-orange-500 dark:bg-gray-700 dark:border-s-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-orange-500"
                                     placeholder="Search..." required />
-                                {{-- <button type="submit"
-                                    class="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-white bg-orange-500 rounded-e-lg border border-orange-500 hover:bg-orange-500 focus:outline-none dark:bg-orange-500 ">
-                                    <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                        fill="none" viewBox="0 0 20 20">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                            stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
-                                    </svg>
-                                    <span class="sr-only">Search</span>
-                                </button> --}}
                             </div>
                         </div>
                     </div>
@@ -90,11 +70,11 @@
                 <div class="">
                     <div class="text-slate-100 mt-2 ">
                         <div class="text-slate-100 mt-2 bg-none dark:bg-gray-800 rounded-[20px] px-[30px] py-2 ">
-                        {!! $events->links() !!}
+                            {!! $events->links() !!}
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
     </section>
     <!-- end Blog grid -->
 
@@ -126,6 +106,10 @@
                 fetchEvents(1);
             });
 
+            $('#categories').on('change', function() {
+                fetchEvents(1);
+            });
+
             $(document).on('click', '.pagination a', function(e) {
                 e.preventDefault();
                 var page = $(this).attr('href').split('page=')[1];
@@ -134,11 +118,16 @@
 
             function fetchEvents(page) {
                 var keyword = $('#search_title').val().trim();
+                var category = $('#categories').val();
+                if (category === 'all') {
+                    category = '';
+                }
                 $.ajax({
                     url: '/search',
                     data: {
                         page: page,
-                        keyword: keyword
+                        keyword: keyword,
+                        category: category
                     },
                     success: function(data) {
                         $('#events').html(data);

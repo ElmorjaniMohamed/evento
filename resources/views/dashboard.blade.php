@@ -2,8 +2,7 @@
 
 @section('content')
     <!-- Start coding here -->
-    <div class=" bg-orange-500 p-4 dark:bg-gray-800 h-fit relative shadow-md sm:rounded-lg overflow-hidden">
-        <!-- component -->
+    <div class="bg-orange-500 p-4 dark:bg-gray-800 h-fit relative shadow-md sm:rounded-lg overflow-hidden">
         <div class="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-4 gap-4">
             <div class="min-w-0 w-[14rem] rounded-lg shadow-xs overflow-hidden bg-[#1B035B] dark:bg-gray-900">
                 <div class="p-4 flex items-center">
@@ -19,7 +18,7 @@
                             Total Users
                         </p>
                         <p class="text-lg font-bold text-orange-500 dark:text-gray-200">
-                            23
+                            {{ $totalUsers }}
                         </p>
                     </div>
                 </div>
@@ -35,10 +34,10 @@
                     </div>
                     <div>
                         <p class="mb-2 text-sm font-medium text-slate-50 dark:text-gray-400">
-                            Tolal Adverts
+                            Total Events
                         </p>
                         <p class="text-lg font-bold text-green-500 dark:text-gray-200">
-                            45
+                            {{ $totalEvents }}
                         </p>
                     </div>
                 </div>
@@ -49,15 +48,15 @@
                         <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 384 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
                             <path fill="#ffffff"
-                                d="M48 0C21.5 0 0 21.5 0 48V464c0 26.5 21.5 48 48 48h96V432c0-26.5 21.5-48 48-48s48 21.5 48 48v80h96c26.5 0 48-21.5 48-48V48c0-26.5-21.5-48-48-48H48zM64 240c0-8.8 7.2-16 16-16h32c8.8 0 16 7.2 16 16v32c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16V240zm112-16h32c8.8 0 16 7.2 16 16v32c0 8.8-7.2 16-16 16H176c-8.8 0-16-7.2-16-16V240c0-8.8 7.2-16 16-16zm80 16c0-8.8 7.2-16 16-16h32c8.8 0 16 7.2 16 16v32c0 8.8-7.2 16-16 16H272c-8.8 0-16-7.2-16-16V240zM80 96h32c8.8 0 16 7.2 16 16v32c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16V112c0-8.8 7.2-16 16-16zm80 16c0-8.8 7.2-16 16-16h32c8.8 0 16 7.2 16 16v32c0 8.8-7.2 16-16 16H176c-8.8 0-16-7.2-16-16V112zM272 96h32c8.8 0 16 7.2 16 16v32c0 8.8-7.2 16-16 16H272c-8.8 0-16-7.2-16-16V112c0-8.8 7.2-16 16-16z" />
+                                d="M48 0C21.5 0 0 21.5 0 48V464c0 26.5 21.5 48 48 48h96V432c0-26.5 21.5-48 48-48s48 21.5 48 48v80h96c26.5 0 48-21.5 48-48V48c0-26.5-21.5-48-48-48H48zM64 240c0-8.8 7.2-16 16-16h32c8.8 0 16 7.2 16 16v32c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16V240zm112-16h32c8.8 0 16 7.2 16 16v32c0 8.8-7.2 16-16 16H176c-8.8 0-16-7.2-16-16V240c0-8.8 7.2-16 16-16zm80 16c0-8.8 7.2-16 16-16h32c8.8 0 16 7.2 16 16v32c0 8.8-7.2 16-16 16H272c-8.8 0-16-7.2-16-16V240zM80 96h32c8.8 0 16 7.2 16 16v32c0 8.8-7.2 16-">
                         </svg>
                     </div>
                     <div>
                         <p class="mb-2 text-sm font-medium text-slate-50 dark:text-gray-400">
-                            Total companies
+                            Total Reservations
                         </p>
                         <p class="text-lg font-semibold text-blue-500 dark:text-gray-200">
-                            33
+                            {{ $totalReservations }}
                         </p>
                     </div>
                 </div>
@@ -73,16 +72,17 @@
                     </div>
                     <div>
                         <p class="mb-2 text-sm font-medium text-slate-50 dark:text-gray-400">
-                            Total Skills
+                            Total Accepted Events
                         </p>
                         <p class="text-lg font-semibold text-violet-500 dark:text-gray-200">
-                            67
+                            {{ $totalAcceptedEvents }}
                         </p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
     {{-- <div class=" bg-orange-500 dark:bg-gray-800 h-fit relative shadow-md mt-4 sm:rounded-lg overflow-hidden">
         <div class="flex items-center justify-start py-2 ml-3">
             <div class="rounded-full bg-blue-500 p-1.5 mr-2"></div>

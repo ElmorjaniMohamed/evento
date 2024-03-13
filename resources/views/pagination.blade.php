@@ -2,7 +2,7 @@
 @foreach ($events as $index => $event)
     <div class="bg-purple-700 rounded-xl p-4 mb-28 max-w-sm shadow dark:bg-gray-800 dark:border-gray-700  group">
         <div class="overflow-hidden rounded-lg">
-            <a href="blog-single.html" class="w-full">
+            <a href="{{route('events.overview', $event->id)}}" class="w-full">
                 <img src="{{ asset('storage/events/' . $event->image) }}" alt="Monteno"
                     class="group-hover:scale-110 rounded-lg w-full transition-all duration-500 ease-in-out h-[15rem]">
             </a>

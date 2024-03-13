@@ -49,7 +49,7 @@
                                         @csrf
                                         <button type="submit"
                                             class="text-white flex items-center justify-center  hover:text-orange-500 btn-action bg-orange-500 hover:bg-slate-50 hover:border-2 hover:border-orange-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-orange-500 dark:hover:bg-orange-600">
-                                            <svg class="w-6 h-6 text-slate-50 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                                            <svg class="w-6 h-6 text-slate-50 hover:text-orange-500 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
                                                 <path d="M4 5a2 2 0 0 0-2 2v2.5c0 .6.4 1 1 1a1.5 1.5 0 1 1 0 3 1 1 0 0 0-1 1V17a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2.5a1 1 0 0 0-1-1 1.5 1.5 0 1 1 0-3 1 1 0 0 0 1-1V7a2 2 0 0 0-2-2H4Z"/>
                                               </svg>
                                               Reserve</button>
