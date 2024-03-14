@@ -10,16 +10,15 @@
         <div class="container">
             <div class="p-0 col-md-12">
                 <div data-aos="fade-up" data-aos-duration="1000"
-                    class="bg-purple-800 relative pt-[52px] pb-[61px] px-[94px] rounded-[20px] before:content-[''] before:w-full before:h-full before:absolute before:top-0 before:left-0 before:bg-[url('../assets/images/background/bg-inner-page-02.html')] before:opacity-[0.63] before:rounded-[20px] before:mix-blend-screen before:bg-cover before:bg-no-repeat before:bg-[center_top] ">
+                    class="bg-purple-800 dark:bg-gray-800 relative pt-[52px] pb-[61px] px-[94px] rounded-[20px] before:content-[''] before:w-full before:h-full before:absolute before:top-0 before:left-0 before:bg-[url('../assets/images/background/bg-inner-page-02.html')] before:opacity-[0.63] before:rounded-[20px] before:mix-blend-screen before:bg-cover before:bg-no-repeat before:bg-[center_top] ">
                     <div class="relative pt-[12px]">
                         <h2
                             class="text-6xl font-bold pb-3 text-slate-50 before::content-[''] before:w-[36px] before:h-[5px] before:absolute before:bottom-0 before:left-0 before:bg-[#fd562a]">
                             Events
                         </h2>
                     </div>
-                    <p class="mb-[33px] pt-3 text-[24px]">Sed ut perspiciatis unde omnis iste natus <br> error sit
-                        voluptatem
-                        accusantium </p>
+                    <p class="mb-[33px] pt-3 text-[24px]">Explore Exciting Events Near
+                        You</p>
                     <img class="absolute hidden md:block lg:block bottom-0 right-[60px] w-96 h-80"
                         src="assets/images/star.png" alt="Monteno">
                 </div>
@@ -31,7 +30,7 @@
     <section>
         <div class="mt-16 mb-4">
             <div class="container">
-                <div class="bg-purple-700 rounded-[20px] mb-[48px] px-[30px] pt-[25px] pb-[29px]">
+                <div class="bg-purple-700 dark:bg-gray-800 rounded-[20px] mb-[48px] px-[30px] pt-[25px] pb-[29px]">
                     <h6
                         class="relative pl-[10px] mb-[8px] before:content-[''] before:absolute before:left-0 before:top-[5px] before:w-[3px] before:h-[15px] before:bg-tf before:rounded-[1.5px]">
                         Search</h6>
@@ -85,7 +84,7 @@
                 <div class="row">
                     <div class="col-12">
                         <div data-aos="fade-up" data-aos-duration="1000"
-                            class="bg-purple-800 rounded-[20px] py-[61px] px-[72px] flex items-center justify-between">
+                            class="bg-purple-700 dark:bg-gray-800 rounded-[20px] py-[61px] px-[72px] flex items-center justify-between">
                             <div class="relative">
                                 <h3 class="mb-[13px]">Reserve your ticket now</h3>
                                 <p class="text-[21px] mb-[7px]">Get udpated with news, tips &amp; tricks</p>

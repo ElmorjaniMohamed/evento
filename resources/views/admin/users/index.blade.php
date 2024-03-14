@@ -72,10 +72,11 @@
                             <td class="px-4 py-3">{{ $user->email }}</td>
                             <td class="px-4 py-3">
                                 @if (!empty($user->getRoleNames()))
-                                    <span
-                                        class="bg-blue-500 text-slate-50 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">
-                                        {{ $user->getRoleNames()[0] }}
-                                    </span>
+                                    @foreach($user->getRoleNames() as $role)
+                                        <span class="bg-blue-500 text-slate-50 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">
+                                            {{ $role }}
+                                        </span>
+                                    @endforeach
                                 @endif
                             </td>
                             <td class="px-4 py-3 max-w-[12rem] truncate">{{ $user->created_at }}

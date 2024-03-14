@@ -5,7 +5,7 @@
     <section class="tf-section hero-slider">
         <div class="py-10 max-[499px]:pb-[20px] relative">
             <div class="container">
-                <div class="flex items-center justify-between">
+                <div class="flex items-center justify-between flex-wrap ">
                     <div class="">
                         <div class="relative pt-[24px] text-start">
                             <h6 data-aos="fade-up" data-aos-duration="1000"
@@ -56,7 +56,7 @@
                                 @foreach ($events as $index => $event)
                                     <div class="swiper-slide pt-[51px]">
                                         <div
-                                            class="bg-[#4526b1] rounded-[10px] py-[20px] px-[25px] text-center cursor-pointer mb-[112px] group">
+                                            class="bg-[#4526b1] dark:bg-gray-800 rounded-[10px] py-[20px] px-[25px] text-center cursor-pointer mb-[112px] group">
                                             <div class="mt-[-71px] relative overflow-hidden">
                                                 <img src="{{ asset('storage/events/' . $event->image) }}" alt="Monteno"
                                                     class="w-full h-40 rounded-[10px]">
@@ -329,7 +329,7 @@
     <!-- end Testimonial -->
 
     <!-- FAQ -->
-    <section class="tf-section faq">
+    <section class="tf-section faq mb-24">
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -440,16 +440,16 @@
     </section>
     <!-- end FAQ -->
 
-    <!-- Action -->
-    <section class="tf-section action">
-        <div class="pt-[149px] py-[122px] ">
+     <!-- Action -->
+     <section class="tf-section action">
+        <div class="pt-[60px] py-[122px] max-[499px]:py-[60px]">
             <div class="container">
                 <div class="row">
                     <div class="col-12">
                         <div data-aos="fade-up" data-aos-duration="1000"
-                            class="bg-[#4c22e1] rounded-[20px] py-[61px] px-[72px] flex items-center justify-between">
+                            class="bg-purple-800 dark:bg-gray-800 rounded-[20px] py-[61px] px-[72px] flex items-center justify-between">
                             <div class="relative">
-                                <h3 class="mb-[13px]">Create Your NFT Portfolio</h3>
+                                <h3 class="mb-[13px]">Reserve your ticket now</h3>
                                 <p class="text-[21px] mb-[7px]">Get udpated with news, tips &amp; tricks</p>
                             </div>
                             <a href="contact.html" class="!py-[18px] !px-[60px] text-[20px] btn-action style-2">Join
@@ -461,4 +461,5 @@
         </div>
     </section>
     <!-- end Action -->
+
 @endsection

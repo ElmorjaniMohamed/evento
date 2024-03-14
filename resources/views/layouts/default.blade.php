@@ -9,11 +9,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
     {{-- <link rel="stylesheet" href="assets/css/bootstrap.min.css"> --}}
-    <link rel="stylesheet" href="{{asset('assets/font/font-awesome.css')}}">
-    <link rel="shortcut icon" href="{{asset('assets/images/favicon.png')}}">
-    <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/css/aos.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/css/swiper-bundle.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/font/font-awesome.css') }}">
+    <link rel="shortcut icon" href="{{ asset('assets/images/favicon.png') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/aos.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/swiper-bundle.min.css') }}">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @vite(['node_modules/flowbite/dist/flowbite.min.js'])
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
@@ -28,7 +28,7 @@
     <!-- Preloading -->
     <div class="preloader">
         <div class="icon">
-            <img src="{{asset('assets/images/favicon.png')}}" alt="">
+            <img src="{{ asset('assets/images/favicon.png') }}" alt="">
         </div>
     </div>
     <!-- end Preloading -->
@@ -48,21 +48,20 @@
         <nav class="transition-colors duration-300 dark:bg-gray-900 bg-none  fixed w-full z-20 top-0 start-0 ">
             <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
                 <a href="{{ route('home') }}" class="flex items-center space-x-3 rtl:space-x-reverse">
-                    <img src="{{asset('assets/images/logo.svg')}}" class="h-8" alt="Logo">
+                    <img src="{{ asset('assets/images/logo.svg') }}" class="h-8" alt="Logo">
                 </a>
                 <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-                    <button id="theme-mode"
-                        class=" mr-2 text-slate-50 dark:text-white bg-orange-500 shadow-lg rounded-full p-2 dark:bg-gray-700">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                            stroke="currentColor" class="w-6 h-6 block dark:hidden">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
+                    <button id="theme-toggle" class="bg-orange-500 p-2.5 rounded-full mr-3" type="button"
+                        class="text-slate-50 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg text-lg p-2.5">
+                        <svg id="theme-toggle-light-icon" class="hidden text-slate-50 w-5 h-5" fill="currentColor"
+                            viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
                         </svg>
-
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                            stroke="currentColor" class="w-6 h-6 hidden dark:block">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" />
+                        <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-slate-50" fill="currentColor"
+                            viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
+                                fill-rule="evenodd" clip-rule="evenodd"></path>
                         </svg>
                     </button>
                     @if (Route::has('login') || Route::has('register'))
@@ -145,7 +144,7 @@
                         </li>
                         <li>
                             <a href="{{ route('events') }}"
-                                class="block py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-orange-500 md:p-0 md:dark:hover:text-orange-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 {{ request()->routeIs('events') ? 'text-orange-500' : '' }}">Events</a>
+                                class="block py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-orange-500 md:p-0 md:dark:hover:text-orange-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 {{ request()->routeIs('events') ? 'text-orange-500' : '' }}">Events</a>
                         </li>
                         <li>
                             <a href="#"
@@ -171,7 +170,7 @@
                     class="footer__body flex text-left flex-wrap pb-[120px] !px-[15px] border-b-[1px] border-solid border-b-[rgba(255,255,255,0.18)] ">
                     <div class="col-xl-3 col-md-6 col-12 p-0">
                         <div class="info">
-                            <img src="{{asset('assets/images/logo.png')}}" alt="Monteno">
+                            <img src="{{ asset('assets/images/logo.png') }}" alt="Monteno">
                             <p class="text-[18px] leading-[1.7] mt-[23px] mb-[16px]">
                                 Duis aute irure dolor in reprehen derit in voluptate velit esse cillum dolore eu fugiat
                                 pariatur.
@@ -271,30 +270,19 @@
 
 
 
-    <script src="{{asset('assets/js/jquery.min.js')}}"></script>
-    <script src="{{asset('assets/js/swiper-bundle.min.js')}}"></script>
-    <script src="{{asset('assets/js/swiper.js')}}"></script>
-    <script src="{{asset('assets/js/countto.js')}}"></script>
-    <script src="{{asset('assets/js/count-down.js')}}"></script>
+    <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('assets/js/swiper-bundle.min.js') }}"></script>
+    <script src="{{ asset('assets/js/swiper.js') }}"></script>
+    <script src="{{ asset('assets/js/countto.js') }}"></script>
+    <script src="{{ asset('assets/js/count-down.js') }}"></script>
     <script src="assets/js/bootstrap.min.js"></script>
-    <script src="{{asset('assets/js/aos.js')}}"></script>
-    <script src="{{asset('assets/js/main.js')}}"></script>
+    <script src="{{ asset('assets/js/aos.js') }}"></script>
+    <script src="{{ asset('assets/js/main.js') }}"></script>
+    <script src="{{ asset('assets/js/dark.js') }}"></script>
     <script>
         AOS.init();
     </script>
-    <script>
-        // Light/Dark Mode Toggle Button
-        var themeColorToggle = document.getElementById('theme-mode');
-        if (themeColorToggle) {
-            themeColorToggle.addEventListener('click', function(e) {
-                var html = document.documentElement;
-                var currentTheme = html.classList.contains('light') ? 'light' : 'dark';
-                var newTheme = currentTheme === 'light' ? 'dark' : 'light';
-                html.classList.remove(currentTheme);
-                html.classList.add(newTheme);
-            });
-        }
-    </script>
+
 
     <script>
         window.addEventListener('scroll', function() {

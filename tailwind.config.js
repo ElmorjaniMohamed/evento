@@ -8,7 +8,10 @@ export default {
         './storage/framework/views/*.php',
         './resources/views/**/*.blade.php',
         "./node_modules/flowbite/**/*.js",
+
     ],
+
+    darkMode: 'class', 
 
     theme: {
         extend: {
