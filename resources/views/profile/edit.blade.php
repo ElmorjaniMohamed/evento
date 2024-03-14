@@ -5,15 +5,15 @@
         <section>
             <div class="container">
                 <div
-                    class="scrollbar-custom-style w-full bg-[#15005D] max-h-[40rem] px-10 py-10 rounded-lg shadow border border-slate-100 overflow-x-hidden">
+                    class="scrollbar-custom-style w-full bg-[#15005D] dark:bg-gray-800 max-h-[40rem] px-10 py-10 rounded-lg shadow border border-slate-100 dark:border-gray-700 overflow-x-hidden">
                     <div class="flex justify-between ">
                         <h1 class="font-semibold text-2xl font-roboto pb-2">My Reservations</h1>
                     </div>
-                    <hr class="border-1 border-slate-300">
+                    <hr class="border-1 border-slate-300 dark:border-gray-700">
 
                     <div id="cartContainer">
                         @forelse ($reservations as $reservation)
-                            <div class="flex items-center rounded-md border-2 mx-1.5 my-5 px-6 py-5">
+                            <div class="flex items-center rounded-md border-2 dark:border-gray-700 mx-1.5 my-5 px-6 py-5">
 
                                 <div class="w-2/5 flex flex-row">
                                     <div class="">
@@ -89,7 +89,7 @@
     <section>
         <div class="container">
             <div class="py-12">
-                <div class="grid grid-cols-3 gap-2 px-2">
+                <div class="grid grid-cols-3 gap-3">
                     <div class="p-4 sm:p-8 bg-white placeholder:text-slate-700 dark:bg-gray-800 shadow sm:rounded-lg">
                         <div class="max-w-xl">
                             @include('profile.partials.update-profile-information-form')

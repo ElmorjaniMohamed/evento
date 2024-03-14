@@ -24,9 +24,11 @@ class ReservationController extends Controller
             ->where('event_id', $eventId)
             ->first();
 
+
         if ($existingReservation) {
             return redirect()->back()->with('danger', 'You have already reserved this event.');
         }
+
 
         if ($event->tickets_booked >= $event->places_available) {
             return redirect()->back()->with('warning', 'Maximum tickets reached.');
@@ -39,7 +41,6 @@ class ReservationController extends Controller
                 'status' => 'Confirmed',
             ]);
 
-            // Increment the number of tickets booked for the event
             $event->increment('tickets_booked');
 
             return redirect()->back()->with('success', 'Event reserved successfully.');

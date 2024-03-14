@@ -8,14 +8,14 @@
             </a>
         </div>
         <div class="pt-4 pb-6">
-            <a href="blog-single.html" class="text-lg mt-2 leading-6 truncate w-80">{{ $event->title }}</a>
+            <a href="{{route('events.overview', $event->id)}}" class="text-lg mt-2 leading-6 truncate w-80">{{ $event->title }}</a>
             <ul class="flex flex-col justify-start space-y-1 mt-3">
                 <li><a href="" class="block text-base"><i
                             class="fa-solid fa-location-dot text-tf mr-2"></i>{{ $event->location }}</a>
                 </li>
                 <li class="flex flex-row gap-3"><a href="" class="block text-base"><i
                             class="fa-solid fa-calendar-days text-tf mr-2"></i>{{ \Carbon\Carbon::parse($event->date)->format('d F Y') }}</a><a
-                        href="" class="block text-base"><i
+                            href="{{route('events.overview', $event->id)}}" class="block text-base"><i
                             class="fa-solid fa-clock text-tf mr-2"></i>{{ \Carbon\Carbon::parse($event->date)->format('h:i A') }}</a>
                 </li>
             </ul>
@@ -27,7 +27,7 @@
             <form action="{{ route('events.reserve', ['eventId' => $event->id]) }}" method="POST">
                 @csrf
                 <button type="submit"
-                    class="text-white hover:text-orange-500 btn-action bg-orange-500 hover:bg-slate-50 hover:border-2 hover:border-orange-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-orange-500 dark:hover:bg-orange-600">Reserve</button>
+                    class="text-white font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-orange-500 ">Reserve</button>
             </form>
         </div>
     </div>
