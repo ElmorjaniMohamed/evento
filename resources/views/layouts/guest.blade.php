@@ -18,8 +18,8 @@
     <body class="font-sans bg-[url('/public/assets/images/background/bg-element-3.jpg')] text-gray-900">
         <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-none dark:bg-gray-900">
             <div>
-                <a href="/">
-                    <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
+                <a href="{{ route('home') }}" class="flex items-center space-x-3 rtl:space-x-reverse">
+                    <img src="{{ asset('assets/images/logo.svg') }}" class="h-8" alt="Logo">
                 </a>
             </div>
 

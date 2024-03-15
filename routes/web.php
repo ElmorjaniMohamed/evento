@@ -21,7 +21,7 @@ use App\Http\Controllers\TicketController;
 |
 */
 
-Route::get('/', [HomeController::class, 'index'])->middleware(['auth', 'verified'])->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/events', [EventController::class, 'events'])->name('events');
 Route::get('/search', [EventController::class, 'search']);
