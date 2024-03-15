@@ -6,7 +6,7 @@
 
 @section('content')
     <!-- PageTitle -->
-    <section class="tf-section action">
+    <section class="tf-section action pt-12">
         <div class="container">
             <div class="p-0 col-md-12">
                 <div data-aos="fade-up" data-aos-duration="1000"
